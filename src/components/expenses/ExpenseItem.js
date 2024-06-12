@@ -23,16 +23,32 @@ const ExpenseItem = ({ date, title, price: exPrice }) => {
 
   //원화 표기법으로 변환
   const formattedPrice = new Intl.NumberFormat("ko-KR").format(exPrice);
+  // 이벤트 핸들러 선언
+  const clickHandler = (e) => {
+    console.log("클릭~");
+    // console.log(e.target.previousElementSibling.firstElementChild.textContent);
+    // const $price = document.querySelector(".expense-item__price");
+    console.log(this);
+  };
   return (
-    <div className="border-blue">
-      <div className="expense-item">
-        <ExpenseDate exDate={date}></ExpenseDate>
-        <div className="expense-item__description">
-          <h2>{title}</h2>
-          <div className="expense-item__price">{formattedPrice}원</div>
-        </div>
+    <Card className="expense-item">
+      <ExpenseDate exDate={date}></ExpenseDate>
+      <div className="expense-item__description">
+        <h2>{title}</h2>
+        <div className="expense-item__price">{formattedPrice}원</div>
       </div>
-    </div>
+      <button id="btn" onClick={clickHandler}>
+        버튼
+      </button>
+      <button
+        id="btn2"
+        onMouseOver={(e) => {
+          alert("zzz");
+        }}
+      >
+        버튼2
+      </button>
+    </Card>
   );
 };
 
