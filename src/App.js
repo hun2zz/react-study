@@ -15,8 +15,9 @@ const App = () => {
 
   return (
     <>
-      <ExpenseItem></ExpenseItem>
-      <ExpenseItem></ExpenseItem>
+      <ExpenseItem title="치킨머금" price={8000} date={new Date(2024, 6, 4)}></ExpenseItem>
+      <ExpenseItem title="족발머금..." price={3000} date={new Date(2024, 6, 6)}></ExpenseItem>
+      <ExpenseItem title="죄책감에 헬스장 등록함 ㅋ" price={5000} date={new Date(2024, 6, 1)}></ExpenseItem>
     </>
   );
 };
