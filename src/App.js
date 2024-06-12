@@ -3,6 +3,24 @@ import React from "react";
 import ExpenseItem from "./components/expenses/ExpenseItem";
 
 const App = () => {
+  //서버에서 지출항목 JSON 배열을 응답받음
+  const expense = [
+    {
+      title: "치킨머금",
+      price: 30000,
+      date: new Date(2024, 6 - 1, 4),
+    },
+    {
+      title: "족발머금...",
+      price: 50000,
+      date: new Date(2024, 6 - 1, 2),
+    },
+    {
+      title: "죄책감에 헬스장 등록함 ㅋ...",
+      price: 300000,
+      date: new Date(2024, 6 - 1, 10),
+    },
+  ];
   // jsx 문법
   // const $h2 = React.createElement("h2", null, "방가방가햄토링~");
 
@@ -15,9 +33,22 @@ const App = () => {
 
   return (
     <>
-      <ExpenseItem title="치킨머금" price={8000} date={new Date(2024, 6, 4)}></ExpenseItem>
-      <ExpenseItem title="족발머금..." price={3000} date={new Date(2024, 6, 6)}></ExpenseItem>
-      <ExpenseItem title="죄책감에 헬스장 등록함 ㅋ" price={5000} date={new Date(2024, 6, 1)}></ExpenseItem>
+      <ExpenseItem
+        title={expense[0].title}
+        price={expense[0].price}
+        date={expense[0].date}
+      ></ExpenseItem>
+      <ExpenseItem
+        title={expense[1].title}
+        price={expense[1].price}
+        date={expense[1].date}
+      ></ExpenseItem>
+      <ExpenseItem
+        title={expense[2].title}
+        price={expense[2].price}
+        date={expense[2].date}
+        z
+      ></ExpenseItem>
     </>
   );
 };
