@@ -1,6 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
+import Hello from "./components/Hello";
+import Bye from "./components/Bye";
+import Greet from "./components/Greet";
 
 function App() {
   // jsx 문법
@@ -16,15 +19,9 @@ function App() {
   const hello = "안녕안녕";
   return (
     <>
-      <div className="App">
-        <h1>{hello}</h1>
-        {$h2}
-
-        <div className="noname">
-          <input type="text"></input>
-          <label htmlFor=""></label>
-        </div>
-      </div>
+      <Hello></Hello>
+      <Bye></Bye>
+      <Greet></Greet>
     </>
   );
 }
