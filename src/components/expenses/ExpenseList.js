@@ -1,11 +1,17 @@
+import ExpenseFilter from "./ExpenseFilter";
 import ExpenseItem from "./ExpenseItem";
 import "./ExpenseList.css";
 
 import React from "react";
 
 const ExpenseList = ({ expenses }) => {
+  const onFilterChange = (filteredYear) => {
+    // ExpenseFilter에 있는 선택된 연도값을 여기서 출력
+    console.log(filteredYear);
+  };
   return (
     <div className="expenses">
+      <ExpenseFilter onChangeFilter={onFilterChange}></ExpenseFilter>
       <ExpenseItem
         title={expenses[0].title}
         price={expenses[0].price}
