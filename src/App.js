@@ -3,6 +3,7 @@ import React from "react";
 import ExpenseList from "./components/expenses/ExpenseList";
 import Greet from "./components/Greet";
 import NewExpense from "./components/new-expense/NewExpense";
+import CheckBoxStyle from "./components/practice/CheckBoxStyle";
 
 const App = () => {
   //서버에서 지출항목 JSON 배열을 응답받음
@@ -33,9 +34,15 @@ const App = () => {
   //4. 의미없는 부모는 <React.Fragment>로 감싸면 됨. -> 축약해서 <> 다이아몬드로 축약 가능.
   //5. 변수값이나 함수를 출력할 때는 {}로 감싸면 됨.
 
+  const onAddExpense = (userInput) => {
+    console.log("App.js 가 내려보낸 함수 호출!");
+    console.log(userInput);
+    expense.push(userInput);
+    console.log(expense);
+  };
   return (
     <>
-      <NewExpense></NewExpense>
+      <NewExpense onSave={onAddExpense}></NewExpense>
       <ExpenseList expenses={expense}></ExpenseList>
     </>
   );
