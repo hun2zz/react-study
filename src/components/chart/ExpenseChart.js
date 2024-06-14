@@ -16,7 +16,7 @@ const ExpenseChart = () => {
     { label: "Nov", value: 0 },
     { label: "Dec", value: 0 },
   ];
-  return <Chart />;
+  return <Chart dataPoints={chartDataPoints} />;
 };
 
 export default ExpenseChart;
