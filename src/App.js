@@ -16,10 +16,14 @@ const DUMMY_DATA = [
 
 const App = () => {
   const [goals, setGoals] = useState(DUMMY_DATA);
+  //CourseInput에게 전달할 함수
+  const addGoalHandler = (goalObject) => {
+    setGoals([...goals, goalObject]);
+  };
   return (
     <div>
       <section id="goal-form">
-        <CourseInput />
+        <CourseInput onAdd={addGoalHandler} />
       </section>
       <section id="goals">
         <CourseList items={goals} />
