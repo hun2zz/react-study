@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = ({ onAdd }) => {
+const ExpenseForm = ({ onAdd, setIsFormVisible }) => {
   // 입력칸에 있는 3개의 값을 각각의 상태값으로 관리
   // const [title, setTitle] = useState("");
   // const [price, setPrice] = useState(0);
@@ -31,6 +31,10 @@ const ExpenseForm = ({ onAdd }) => {
       ...userInput,
       title: e.target.value,
     });
+  };
+
+  const cancleBody = (e) => {
+    setIsFormVisible(false);
   };
 
   // 가격이 입력되었을 때 발생하는 이벤트 핸들러
@@ -108,6 +112,9 @@ const ExpenseForm = ({ onAdd }) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={cancleBody}>
+          Cancle
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

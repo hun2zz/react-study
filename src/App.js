@@ -49,7 +49,7 @@ const App = () => {
   const onAddExpense = (userInput) => {
     console.log("App.js 가 내려보낸 함수 호출!");
     // console.log(userInput);
-    expenseList.push(userInput);
+    // expenseList.push(userInput);
     setExpenseList([...expenseList, userInput]);
     // console.log(expense);
   };
