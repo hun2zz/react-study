@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import ExpenseList from "./components/expenses/ExpenseList";
 import Greet from "./components/Greet";
 import NewExpense from "./components/new-expense/NewExpense";
@@ -16,14 +16,26 @@ const App = () => {
     {
       title: "족발머금...",
       price: 50000,
-      date: new Date(2024, 6 - 1, 2),
+      date: new Date(2023, 6 - 1, 2),
     },
     {
       title: "죄책감에 헬스장 등록함 ㅋ...",
-      price: 300000,
+      price: 100000,
       date: new Date(2024, 6 - 1, 10),
     },
+    {
+      title: "파파존스피자",
+      price: 400000,
+      date: new Date(2022, 3 - 1, 20),
+    },
+    {
+      title: "파리채",
+      price: 30000,
+      date: new Date(2023, 5 - 1, 20),
+    },
   ];
+
+  const [expenseList, setExpenseList] = useState(expense);
   // jsx 문법
   // const $h2 = React.createElement("h2", null, "방가방가햄토링~");
 
@@ -36,14 +48,15 @@ const App = () => {
 
   const onAddExpense = (userInput) => {
     console.log("App.js 가 내려보낸 함수 호출!");
-    console.log(userInput);
-    expense.push(userInput);
-    console.log(expense);
+    // console.log(userInput);
+    expenseList.push(userInput);
+    setExpenseList([...expenseList, userInput]);
+    // console.log(expense);
   };
   return (
     <>
       <NewExpense onSave={onAddExpense}></NewExpense>
-      <ExpenseList expenses={expense}></ExpenseList>
+      <ExpenseList expenses={expenseList}></ExpenseList>
     </>
   );
 };
