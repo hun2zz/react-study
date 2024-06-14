@@ -44,7 +44,7 @@ const ExpenseList = ({ expenses }) => {
   return (
     <div className="expenses">
       <ExpenseFilter onChangeFilter={onFilterChange} />
-      <ExpenseChart></ExpenseChart>
+      <ExpenseChart onFilter={filteredExpenses}></ExpenseChart>
 
       {noContent}
     </div>
