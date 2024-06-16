@@ -20,7 +20,7 @@ const App = () => {
   const addGoalHandler = (goalObject) => {
     setGoals([...goals, goalObject]);
   };
-
+ 
   //CourseItem에게 전달할 함수
   const deleteGoalHandler = (id) => {
     // goals.splice(
