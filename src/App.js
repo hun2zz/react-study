@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import CourseInput from "./components/CourseGoals/CourseInput";
 import CourseList from "./components/CourseGoals/CourseList";
 import "./App.css";
+import AddUsers from "./components/Users/AddUsers";
+import UserList from "./components/Users/UserList";
+import ErrorModal from "./components/UI/Modal/ErrorModal";
 
 const DUMMY_DATA = [
   {
@@ -20,7 +23,7 @@ const App = () => {
   const addGoalHandler = (goalObject) => {
     setGoals([...goals, goalObject]);
   };
- 
+
   //CourseItem에게 전달할 함수
   const deleteGoalHandler = (id) => {
     // goals.splice(
@@ -30,15 +33,19 @@ const App = () => {
     const filteredGoals = goals.filter((g) => g.id !== id);
     setGoals(filteredGoals);
   };
+  //회원들이 저장될 배열~
+  const [userList, setUserList] = useState([]);
+
+  const addUserHandler = (user) => {
+    console.log(user);
+    setUserList((prev) => [...prev, { ...user, id: Math.random().toString() }]);
+  };
   return (
-    <div>
-      <section id="goal-form">
-        <CourseInput onAdd={addGoalHandler} />
-      </section>
-      <section id="goals">
-        <CourseList items={goals} onDelete={deleteGoalHandler} />
-      </section>
-    </div>
+    <>
+      {/* <ErrorModal title={'모달 제목~'} message={'내용'}></ErrorModal> */}
+      <AddUsers onAddUser={addUserHandler}> </AddUsers>
+      <UserList users={userList} />
+    </>
   );
 };
 
