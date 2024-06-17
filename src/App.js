@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import CourseInput from "./components/CourseGoals/CourseInput";
 import CourseList from "./components/CourseGoals/CourseList";
 import "./App.css";
@@ -36,7 +36,12 @@ const App = () => {
   //회원들이 저장될 배열~
   const [userList, setUserList] = useState([]);
 
+  //useRef는 참조값을 기억을 해두고, 전역변수처럼 사용할 수 잇음
+  const count = useRef(1);
+
   const addUserHandler = (user) => {
+    count.current++;
+    console.log("count : ", count.current);
     console.log(user);
     setUserList((prev) => [...prev, { ...user, id: Math.random().toString() }]);
   };
