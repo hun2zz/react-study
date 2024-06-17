@@ -1,5 +1,5 @@
 import React from "react";
-import "./CourseItem.css";
+import styles from "./CourseItem.module.css";
 const CourseItem = ({ item, onDelete }) => {
   const deleteHandler = (e) => {
     console.log("삭제해종");
@@ -7,7 +7,7 @@ const CourseItem = ({ item, onDelete }) => {
     // 여기서 App.js 에게 삭제 대상의 id를 전달
   };
   return (
-    <li className="goal-item" onClick={deleteHandler}>
+    <li className={styles["goal-item"]} onClick={deleteHandler}>
       {item.text}
     </li>
   );
