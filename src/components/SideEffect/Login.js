@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Card from "../UI/Card";
 import styles from "./Login.module.css";
@@ -18,18 +18,10 @@ const Login = ({ onLogin }) => {
 
   const emailChangeHandler = (e) => {
     setEnteredEmail(e.target.value);
-
-    setFormIsValid(
-      e.target.value.includes("@") && enteredPassword.trim().length > 6
-    );
   };
 
   const passwordChangeHandler = (e) => {
     setEnteredPassword(e.target.value);
-
-    setFormIsValid(
-      e.target.value.trim().length > 6 && enteredEmail.includes("@")
-    );
   };
 
   const validateEmailHandler = () => {
@@ -47,6 +39,11 @@ const Login = ({ onLogin }) => {
     onLogin(enteredEmail, enteredPassword);
   };
 
+  useEffect(() => {
+    setFormIsValid(
+      enteredPassword.trim().length > 6 && enteredEmail.includes("@")
+    );
+  }, [enteredEmail, enteredPassword]);
   return (
     <Card className={styles.login}>
       <form onSubmit={submitHandler}>
