@@ -21,3 +21,15 @@ $ npm start
 ```
 
 - http://localhost:3000 에서 프론트엔드 서버 실행
+
+
+
+## 추가 라이브러리 설치
+1. styled-components : 동적 css 처리를 도와주는 라이브러리
+- `$ npm install styled-components`
+
+2. bootstrap, reactstrap : CSS 라이브러리
+-  `$ npm install bootstrap reactstrap`
+
+3. sass : CSS 확장 문법 라이브러리
+- `$ npm install sass`
