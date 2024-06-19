@@ -6,9 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
   const todo = [
     {
+      id: 1,
       title: "ㄴㅁㅇㅁㄴㅇㅁㄴㅇzzzzㅁㄴㅇ123",
     },
     {
+      id: 2,
       title: "ㄴㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ12aasdasdsdasd3",
     },
   ];
@@ -23,7 +25,17 @@ const App = () => {
     // console.log(expense);
   };
 
-  return <TodoTemplate onSave={onAddExpense} onList={todoList}></TodoTemplate>;
+  const onDeleteExpense = (id) => {
+    setTodoList(todoList.filter((todo) => todo.id !== id));
+  };
+
+  return (
+    <TodoTemplate
+      onSave={onAddExpense}
+      onList={todoList}
+      onDelete={onDeleteExpense}
+    ></TodoTemplate>
+  );
 };
 
 export default App;

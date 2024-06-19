@@ -2,7 +2,7 @@ import React from "react";
 import "./scss/TodoHeader.scss";
 import dateContext from "../../store/auth-context";
 
-const TodoHeader = ({ onDate, setThisDate }) => {
+const TodoHeader = ({ onDate, setThisDate, onList }) => {
   console.log(onDate);
   const month = onDate.getMonth() + 1;
   let day =
@@ -23,7 +23,7 @@ const TodoHeader = ({ onDate, setThisDate }) => {
     <header>
       <h1>{day}</h1>
       <div className="day">{week[day2]}</div>
-      <div className="tasks-left">할 일 3개 남음</div>
+      <div className="tasks-left">{onList.length}개 남음~해</div>
     </header>
   );
 };

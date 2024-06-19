@@ -5,14 +5,14 @@ import TodoInput from "./TodoInput";
 import TodoMain from "./TodoMain";
 import dateContext from "../../store/auth-context";
 
-const TodoTemplate = ({ onSave, onList }) => {
+const TodoTemplate = ({ onSave, onList, onDelete }) => {
   const [thisDate, setThisDate] = useState(new Date());
 
   return (
     <div className="TodoTemplate">
-      <TodoHeader onDate={thisDate} setDate={setThisDate} />
-      <TodoMain onList={onList} />
-      <TodoInput onSave={onSave} />
+      <TodoHeader onDate={thisDate} setDate={setThisDate} onList={onList} />
+      <TodoMain onList={onList} onDelete={onDelete} />
+      <TodoInput onSave={onSave} onList={onList} />
     </div>
   );
 };
