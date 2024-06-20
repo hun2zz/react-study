@@ -1,44 +1,43 @@
-import React, { useState } from "react";
-import { MdAdd } from "react-icons/md";
-import "./scss/TodoInput.scss";
+import React, { useRef, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
 
-const TodoInput = ({ onSave, onList }) => {
-  const [inputValue, setInputValue] = useState("");
+import './scss/TodoInput.scss';
 
-  //입력창 토글링 상태값
+const TodoInput = ({ onAdd }) => {
+
+  // input의 주소값을 기억하는 변수 생성
+  const $textInput = useRef();
+
+  // 입력창 토글링 상태값
   const [open, setOpen] = useState(false);
-  //버튼 토글링 함수
-  const onToggle = () => setOpen(!open);
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  // 버튼 토글링 함수
+  const onToggle = () => setOpen(prevOpen => !prevOpen);
 
-  const handleFormSubmit = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
-    if (inputValue.trim() !== "") {
-      onSave({ id: Math.random().toString(), title: inputValue });
-      setInputValue("");
-    }
+    onAdd($textInput.current.value);
+    // form이 제출되면 입력창 비우기
+    $textInput.current.value = '';
+    setOpen(false);
   };
 
   return (
     <>
       {open && (
         <div className="form-wrapper">
-          <form className="insert-form" onSubmit={handleFormSubmit}>
+          <form className="insert-form" onSubmit={submitHandler}>
             <input
+              ref={$textInput}
               type="text"
               placeholder="할 일을 입력 후, 엔터를 누르세요!"
-              value={inputValue}
-              onChange={handleInputChange}
             />
           </form>
         </div>
       )}
 
       <button
-        className={`insert-btn ${open ? "open" : undefined}`}
+        className={`insert-btn ${open ? 'open' : undefined}`}
         onClick={onToggle}
       >
         <MdAdd />
