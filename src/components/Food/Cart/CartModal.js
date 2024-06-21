@@ -12,7 +12,7 @@ const Modaloverlay = ({ children }) => {
 const CartModal = ({ children }) => {
   return (
     <>
-      <div className="backdrop"></div>
+      <div className={styles.backdrop}></div>
       <Modaloverlay>{children}</Modaloverlay>
     </>
   );
