@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./CartModal.module.scss";
+import React from 'react';
+import styles from './CartModal.module.scss';
 
-const Modaloverlay = ({ children, onClose }) => {
+const ModalOverlay = ({ children }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>{children}</div>
@@ -12,8 +12,10 @@ const Modaloverlay = ({ children, onClose }) => {
 const CartModal = ({ children, onClose }) => {
   return (
     <>
-      <div className={styles.backdrop} onClick={onClose}></div>
-      <Modaloverlay>{children}</Modaloverlay>
+      <div className={styles.backdrop} onClick={onClose} />
+      <ModalOverlay>
+        {children}
+      </ModalOverlay>
     </>
   );
 };

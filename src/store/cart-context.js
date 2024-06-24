@@ -5,6 +5,7 @@ import React from "react";
 // 매개변수에 전달하는 객체는 상태들을 정의하는 개념
 const CartContext = React.createContext({
   cartItems: [], // 장바구니 배열
+  totalPrice: 0,
   addItem: (item) => {}, //장바구니에 추가하는 함수
   removeItem: (id) => {}, //장바구니에서 상품을 제거하는 함수
 });
