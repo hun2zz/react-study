@@ -4,7 +4,7 @@ import styles from "./CartItem.module.scss";
 import CartContext from "../../../store/cart-context";
 
 const CartItem = ({ cart }) => {
-  const { addItem } = useContext(CartContext);
+  const { addItem, removeItem } = useContext(CartContext);
 
   const { name, price, amount } = cart;
 
@@ -25,6 +25,14 @@ const CartItem = ({ cart }) => {
     addItem(item);
   };
 
+  const cartRemoveHandler = () => {
+    const item = {
+      ...cart,
+      amount: 1,
+    };
+    removeItem(item);
+  };
+
   const formatPrice = new Intl.NumberFormat("ko-KR").format(price);
 
   return (
@@ -37,7 +45,7 @@ const CartItem = ({ cart }) => {
         </div>
       </div>
       <div className={actions}>
-        <button>−</button>
+        <button onClick={cartRemoveHandler}>−</button>
         <button onClick={cartAddHandler}>+</button>
       </div>
     </li>
