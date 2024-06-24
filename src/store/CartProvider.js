@@ -19,6 +19,27 @@ const cartReducer = (state, action) => {
     // 장바구니 추가
     // 상태 업데이트 코드
     //장바구니 배열 상태 업데이트
+
+    //기존에 장바구니에 없는 새로운 상품이 장바구니에 추가된 경우
+
+    //이미 장바구니에 있었던 상품의 추가
+    const newCartItem = action.value;
+
+    //기존에 등록된 메뉴인지 확인해보기 위해 해당 아이템의 인덱스를 탐색
+    const index = state.items.findIndex((item) => item.id === newCartItem.id);
+
+    //기존에 존재하는 아이템배열 사본
+
+    const existingItems = [...state.items];
+
+    //신규 아이템인 경우
+    let updatedItems;
+    if (index === -1) {
+      updatedItems = [...existingItems, newCartItem];
+    } else {
+      existingItems[index].amount += newCartItem.amount;
+      updatedItems = [...existingItems];
+    } // 이미 장바구니에 있었던 상품의 추가 : 수량만 업데이트
     const updateCartItems = [...state.items, action.value];
 
     //총액 상태 업데이트
@@ -28,7 +49,7 @@ const cartReducer = (state, action) => {
     const updateSum = state.totalSum + action.value.amount;
 
     return {
-      items: updateCartItems,
+      items: updatedItems,
       totalPrice: updatePrice,
       totalSum: updateSum,
     }; // 새로운 상태
