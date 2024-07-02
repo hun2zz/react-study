@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <h1>My Home Page</h1>
       <p>
-        <Link to="/products">Products</Link>로 이동하기
+        <Link to="products">Products</Link>로 이동하기
       </p>
     </>
   );

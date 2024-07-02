@@ -6,7 +6,7 @@ const Products = () => {
     <>
       <h1>My Products Page</h1>
       <p>
-        <Link to="/">Home</Link>로 이동하기
+        <Link to="..">Home</Link>로 이동하기
       </p>
     </>
   );
