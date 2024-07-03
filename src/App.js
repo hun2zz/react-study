@@ -7,6 +7,7 @@ import ErrorPage from "./components/RouteExample/pages/ErrorPage";
 import ProductDetail from "./components/RouteExample/pages/ProductDetail";
 import Events from "./components/RouteExample/pages/Events";
 import EventDetail from "./components/RouteExample/pages/EventDetail";
+import EventLayout from "./components/RouteExample/layout/EventLayout";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,14 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       { index: true, element: <Home /> },
-      { path: "events", element: <Events /> },
-      { path: "events/:prodId", element: <EventDetail /> },
+      {
+        path: "events",
+        element : <EventLayout></EventLayout>,
+        children: [
+          { index: true, element: <Events /> },
+          { path: ":prodId", element: <EventDetail /> },
+        ],
+      },
     ],
   },
 ]);
