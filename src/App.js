@@ -4,15 +4,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Products from "./components/RouteExample/pages/Products";
 import RootLayout from "./components/RouteExample/layout/RootLayout";
 import ErrorPage from "./components/RouteExample/pages/ErrorPage";
+import ProductDetail from "./components/RouteExample/pages/ProductDetail";
+import Events from "./components/RouteExample/pages/Events";
+import EventDetail from "./components/RouteExample/pages/EventDetail";
 
 const router = createBrowserRouter([
   {
-    path: "/base",
+    path: "/",
     element: <RootLayout></RootLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
-      { path: "", element: <Home /> },
-      { path: "products", element: <Products /> },
+      { index: true, element: <Home /> },
+      { path: "events", element: <Events /> },
+      { path: "events/:prodId", element: <EventDetail /> },
     ],
   },
 ]);
