@@ -35,3 +35,18 @@ const Events = () => {
 };
 
 export default Events;
+
+//loader를 app.js로부터 아웃소싱
+export const loader = async () => {
+  const response = await fetch("http://localhost:8282/events");
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Response(JSON.stringify({ messages: errorText }), {
+      status: response.status,
+    });
+  }
+
+  //로더가 리턴한 데이터는 loader를 선언한 컴포넌트와 그 하위 컴포넌트에서
+  //언제든 불러서 사용 가능
+  return response;
+};
