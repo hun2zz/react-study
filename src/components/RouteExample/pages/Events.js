@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import EventList from "../components/EventList";
 import EventsNavigation from "../layout/EventNavigation";
 
@@ -23,15 +23,8 @@ import EventsNavigation from "../layout/EventNavigation";
 // ];
 
 const Events = () => {
-  const [eventList, setEventList] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("http://localhost:8282/events");
-      const jsonDAta = await response.json();
-      setEventList(jsonDAta);
-    })();
-  }, []);
+  //loader가 리턴한 데이터 받아오기 .
+  const eventList = useLoaderData();
 
   return (
     <>
