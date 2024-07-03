@@ -8,6 +8,7 @@ import ProductDetail from "./components/RouteExample/pages/ProductDetail";
 import Events from "./components/RouteExample/pages/Events";
 import EventDetail from "./components/RouteExample/pages/EventDetail";
 import EventLayout from "./components/RouteExample/layout/EventLayout";
+import NewEvent from "./components/RouteExample/pages/NewEvent";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
             },
           },
           { path: ":prodId", element: <EventDetail /> },
+          { path: "new", element: <NewEvent /> },
         ],
       },
     ],
