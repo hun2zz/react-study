@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, json } from "react-router-dom";
 import EventList from "../components/EventList";
 import EventsNavigation from "../layout/EventNavigation";
 
@@ -38,7 +38,7 @@ export default Events;
 
 //loader를 app.js로부터 아웃소싱
 export const loader = async () => {
-  const response = await fetch("http://localhost:8282/events");
+  const response = await fetch("http://localhost:8282/events?sort=date");
   if (!response.ok) {
     const errorText = await response.text();
     throw new Response(JSON.stringify({ messages: errorText }), {
