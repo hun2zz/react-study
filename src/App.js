@@ -13,6 +13,7 @@ import EventDetail, {
 } from "./components/RouteExample/pages/EventDetail";
 import EventLayout from "./components/RouteExample/layout/EventLayout";
 import NewEvent from "./components/RouteExample/pages/NewEvent";
+import EditPage from "./components/RouteExample/pages/EditPage";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +36,13 @@ const router = createBrowserRouter([
           },
           {
             path: ":prodId",
-            element: <EventDetail />,
+
             loader: eventDetailLoader,
+            id: "event-detail",
+            children: [
+              { index: true, element: <EventDetail /> },
+              { path: "edit", element: <EditPage /> },
+            ],
           },
           { path: "new", element: <NewEvent /> },
         ],

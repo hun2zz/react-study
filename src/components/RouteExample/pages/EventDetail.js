@@ -1,17 +1,17 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useRouteLoaderData } from "react-router-dom";
 import EventItem from "../components/EventItem";
 
 const EventDetail = () => {
-  const ev = useLoaderData();
-
+  // const ev = useLoaderData();
+  const ev = useRouteLoaderData("event-detail");
   return <EventItem event={ev} />;
 };
 
 export default EventDetail;
 
 export const loader = async ({ params }) => {
-  const { eventId: id } = params;
+  const { prodId: id } = params;
 
   // console.log('abc: ', abc.params.eventId);
 
