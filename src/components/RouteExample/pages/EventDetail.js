@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData, useRouteLoaderData } from "react-router-dom";
 import EventItem from "../components/EventItem";
+import { redirect } from "react-router-dom";
 
 const EventDetail = () => {
   // const ev = useLoaderData();
@@ -32,14 +33,16 @@ export const loader = async ({ params }) => {
 export const action = async (abc) => {
   // action 함수를 트리거하는 방법
   // 1. form이 있는 EventForm으로 이동
-  console.log(abc.params.prodId);
+  const id = abc.params.prodId;
 
   // const formData = await request.formData();
   // // console.log(formData);
 
   // // console.log(payload);
+  if (!window.confirm("정말 삭제하시겠어요?")) return;
+  await fetch(`http://localhost:8282/events/${id}`, {
+    method: "DELETE",
+  });
 
-  fetch(`http://localhost:8282/events/${abc.params.prodId}`);
-
-  // return redirect("/events");
+  return redirect("/events");
 };
