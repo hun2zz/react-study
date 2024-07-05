@@ -4,15 +4,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Products from "./components/RouteExample/pages/Products";
 import RootLayout from "./components/RouteExample/layout/RootLayout";
 import ErrorPage from "./components/RouteExample/pages/ErrorPage";
-import ProductDetail from "./components/RouteExample/pages/ProductDetail";
 import Events, {
   loader as eventListLoader,
 } from "./components/RouteExample/pages/Events";
 import EventDetail, {
   loader as eventDetailLoader,
+  action as deleteAction,
 } from "./components/RouteExample/pages/EventDetail";
 import EventLayout from "./components/RouteExample/layout/EventLayout";
-import NewEvent from "./components/RouteExample/pages/NewEvent";
+import NewEvent, {
+  action as saveAction,
+} from "./components/RouteExample/pages/NewEvent";
 import EditPage from "./components/RouteExample/pages/EditPage";
 
 const router = createBrowserRouter([
@@ -40,11 +42,11 @@ const router = createBrowserRouter([
             loader: eventDetailLoader,
             id: "event-detail",
             children: [
-              { index: true, element: <EventDetail /> },
+              { index: true, element: <EventDetail />, action: deleteAction },
               { path: "edit", element: <EditPage /> },
             ],
           },
-          { path: "new", element: <NewEvent /> },
+          { path: "new", element: <NewEvent />, action: saveAction },
         ],
       },
     ],

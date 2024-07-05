@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./EventItem.module.scss";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 const EventItem = ({ event }) => {
   const {
@@ -18,7 +18,9 @@ const EventItem = ({ event }) => {
       <p>{description}</p>
       <menu className={styles.actions}>
         <Link to="edit">Edit</Link>
-        <button>Delete</button>
+        <Form method="post">
+          <button type="submit">Delete</button>
+        </Form>
       </menu>
     </article>
   );

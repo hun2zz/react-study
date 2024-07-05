@@ -28,3 +28,18 @@ export const loader = async ({ params }) => {
   return await response.json();
   // console.log('json: ', json);
 };
+
+export const action = async (abc) => {
+  // action 함수를 트리거하는 방법
+  // 1. form이 있는 EventForm으로 이동
+  console.log(abc.params.prodId);
+
+  // const formData = await request.formData();
+  // // console.log(formData);
+
+  // // console.log(payload);
+
+  fetch(`http://localhost:8282/events/${abc.params.prodId}`);
+
+  // return redirect("/events");
+};

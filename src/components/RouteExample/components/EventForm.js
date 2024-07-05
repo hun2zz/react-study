@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./EventForm.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form } from "react-router-dom";
 
 const EventForm = ({ method, event = {} }) => {
   const {
@@ -41,31 +41,35 @@ const EventForm = ({ method, event = {} }) => {
     navigate("..");
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
 
-    const payload = {
-      title: formData.get("title"),
-      desc: formData.get("description"),
-      imageUrl: formData.get("image"),
-      beginDate: formData.get("date"),
-    };
+  //   const payload = {
+  //     title: formData.get("title"),
+  //     desc: formData.get("description"),
+  //     imageUrl: formData.get("image"),
+  //     beginDate: formData.get("date"),
+  //   };
 
-    // console.log(payload);
-    (async () => {
-      const response = await fetch("http://localhost:8282/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      navigate("/events");
-    })();
-  };
+  //   // console.log(payload);
+  //   (async () => {
+  //     const response = await fetch("http://localhost:8282/events", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
+  //     navigate("/events");
+  //   })();
+  // };
+
+  //2. action 함수를 트리거하려면 일반 form을 사용하면 안되고,
+  // 3. react-router - dom 에서 제공하는 Form이라는 컴포넌트를 사용한다.
+  // 4. method 옵션을 설정한다.
   return (
-    <form className={styles.form} onSubmit={submitHandler} noValidate>
+    <Form method="post" className={styles.form} noValidate>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -112,7 +116,7 @@ const EventForm = ({ method, event = {} }) => {
         </button>
         <button>{method === "post" ? "Save" : "Modify"}</button>
       </div>
-    </form>
+    </Form>
   );
 };
 
