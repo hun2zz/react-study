@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./EventList.module.scss";
 import { Link, useLoaderData } from "react-router-dom";
-const EventList = () => {
-  const eventList = useLoaderData();
+const EventList = ({ eventList }) => {
+  // const eventList = useLoaderData();
 
   const { events, list, item, content } = styles;
   return (

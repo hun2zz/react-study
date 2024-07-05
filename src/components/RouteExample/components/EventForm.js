@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./EventForm.module.scss";
-import { useNavigate, Form } from "react-router-dom";
+import { useNavigate, Form, redirect } from "react-router-dom";
 
 const EventForm = ({ method, event = {} }) => {
   const {
@@ -69,7 +69,7 @@ const EventForm = ({ method, event = {} }) => {
   // 3. react-router - dom 에서 제공하는 Form이라는 컴포넌트를 사용한다.
   // 4. method 옵션을 설정한다.
   return (
-    <Form method="post" className={styles.form} noValidate>
+    <Form method={method} className={styles.form} noValidate>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -121,3 +121,41 @@ const EventForm = ({ method, event = {} }) => {
 };
 
 export default EventForm;
+
+export const action = async ({ request, params }) => {
+  console.log(params);
+  // action 함수를 트리거하는 방법
+  // 1. form이 있는 EventForm으로 이동
+  // console.log('action함수 call!');
+
+  // console.log('req: ', request);
+
+  const formData = await request.formData();
+  // console.log(formData);
+
+  const payload = {
+    title: formData.get("title"),
+    desc: formData.get("description"),
+    imageUrl: formData.get("image"),
+    beginDate: formData.get("date"),
+  };
+
+  // console.log(payload);
+
+  let url = `http://localhost:8282/events`;
+  if (request.method === "PATCH") {
+    url += `/${params.prodId}`;
+  }
+
+  console.log("info: ", { url, method: request.method });
+
+  const response = await fetch(url, {
+    method: request.method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  return redirect("/events");
+};

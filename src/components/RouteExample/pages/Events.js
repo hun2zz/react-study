@@ -1,52 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData, json } from "react-router-dom";
 import EventList from "../components/EventList";
-import EventsNavigation from "../layout/EventNavigation";
-
-// const DUMMY_EVENTS = [
-//   {
-//     id: "1",
-//     title: "여름맞이 이벤트",
-//     image:
-//       "https://www.dawonnews.co.kr/news/photo/202206/95792_100192_2649.jpg",
-//     date: "2024-07-20",
-//     description: "여름맞이 이벤트입니다.",
-//   },
-//   {
-//     id: "2",
-//     title: "건강관리 이벤트",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTbENLWw4qvXCg0BI8M0jEfFMg_hW7RAbLg&s",
-//     date: "2024-07-15",
-//     description: "건강이벤트 입니다. 건강!",
-//   },
-// ];
+import EventSkeleton from "../components/EventSkeleton";
 
 const Events = () => {
-  //loader가 리턴한 데이터 받아오기 .
-  const eventList = useLoaderData();
+  // loader가 리턴한 데이터 받아오기
+  // const eventList = useLoaderData();
+  // console.log(eventList);
+
+  // 서버에서 가져온 이벤트 목록
+  const [events, setEvents] = useState([]);
+
+  // 로딩 상태 체크
+  const [loading, setLoading] = useState(false);
+
+  //현재 페이지 번호
+  const [currentPage, setCurrentpage] = useState(1);
+
+  // 서버로 목록 조회 요청보내기
+  const loadEvents = async () => {
+    console.log("start loading...");
+    setLoading(true);
+
+    const response = await fetch(
+      `http://localhost:8282/events/page/${currentPage}?sort=date`
+    );
+    const events = await response.json();
+
+    setEvents(events);
+    setLoading(false);
+    console.log("end loading!!");
+  };
+
+  // 초기 이벤트 1페이지 목록 가져오기
+  useEffect(() => {
+    loadEvents();
+  }, []);
+
+  //스크롤 핸들러
+  const scrollHandler = () => {
+    console.log("scroll");
+  };
+
+  //스크롤 이벤트 바인딩
+  window.addEventListener("scroll", scrollHandler);
 
   return (
     <>
-      <h1>Events Page</h1>
-      <EventList eventList={eventList}></EventList>
+      <EventList eventList={events} />
+      {loading && <EventSkeleton />}
     </>
   );
 };
 
 export default Events;
 
-//loader를 app.js로부터 아웃소싱
-export const loader = async () => {
-  const response = await fetch("http://localhost:8282/events?sort=date");
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Response(JSON.stringify({ messages: errorText }), {
-      status: response.status,
-    });
-  }
+// loader를 app.js로부터 아웃소싱
+// export const loader = async () => {
 
-  //로더가 리턴한 데이터는 loader를 선언한 컴포넌트와 그 하위 컴포넌트에서
-  //언제든 불러서 사용 가능
-  return response;
-};
+//   const response = await fetch('http://localhost:8282/events/page/1?sort=date');
+
+//   if (!response.ok) {
+//     const errorText = await response.text();
+//     throw json(
+//       { message: errorText },
+//       {
+//         status: response.status
+//       }
+//     );
+//   }
+//   return response; // ok일 경우 events[]
+// };
