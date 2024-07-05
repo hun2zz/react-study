@@ -54,8 +54,28 @@ const cartReducer = (state, action) => {
       totalSum: updateSum,
     }; // 새로운 상태
   } else if (action.type === "REMOVE") {
+    const newCartItem = action.value;
+    const index = state.items.findIndex((item) => item.id === newCartItem.id);
+    const existingItems = [...state.items];
+    let updatedItems;
+    if (existingItems[index].amount > 1) {
+      existingItems[index].amount -= action.value.amount;
+      updatedItems = [...existingItems];
+    } else if (existingItems[index].amount <= 1) {
+      updatedItems = existingItems.filter(
+        (ex) => existingItems[index].id !== ex.id
+      );
+    }
     // 장바구니 제거
-    return null; // 새로운 상태
+    const updatePrice = state.totalPrice - action.value.price;
+
+    const updateSum = state.totalSum - action.value.amount;
+
+    return {
+      items: updatedItems,
+      totalPrice: updatePrice,
+      totalSum: updateSum,
+    };
   }
   return defaultState; // 새로운 상태
 };
@@ -79,13 +99,24 @@ const CartProvider = ({ children }) => {
     });
   };
 
+  const removeItemHandler = (id) => {
+    // console.log('장바구니에 데이터 추가! - ', item);
+
+    // 액션함수는 지금 어떤 상태를 업데이트할지에 대한 액션이름과 값을 객체로 전달
+    // 이 객체는 reducer함수의 2번째 파라미터인 action에 전달됨!
+    dispatchCartAction({
+      type: "REMOVE",
+      value: id,
+    });
+  };
+
   // Provider가 실제로 관리할 상태들의 구체적인 내용들
   const cartContext = {
     cartItems: cartState.items, // 상태값
     totalPrice: cartState.totalPrice,
     totalSum: cartState.totalSum,
     addItem: addItemHandler, // 상태를 업데이트하는 함수
-    removeItem: (id) => {}, // 상태를 업데이트하는 함수
+    removeItem: removeItemHandler, // 상태를 업데이트하는 함수
   };
 
   return (
